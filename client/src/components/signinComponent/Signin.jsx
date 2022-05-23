@@ -3,8 +3,6 @@ import { Modal, Form, Button } from "react-bootstrap";
 import AuthService from "../../services/auth.services";
 
 
-
-
 const Signin = ({handleClose, handleShow, show}) => {
 
     const [userForm, setUserForm] = useState({

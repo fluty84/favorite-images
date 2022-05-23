@@ -2,8 +2,8 @@ import { useState, useContext } from "react"
 import { Form, Button, Container } from 'react-bootstrap'
 import authService from '../../services/auth.services'
 import { useNavigate} from 'react-router-dom'
-import { AuthContext } from './../../context/auth.context'
-import Signin from "../signinComponent/Signin"
+import { AuthContext } from '../../context/auth.context'
+import Signin from "../../components/signinComponent/Signin"
 
 
 

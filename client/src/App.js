@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import { AuthContext } from "../src/context/auth.context";
 
-import Login from './components/loginComponent/Login'
+import Login from './pages/loginComponent/Login'
 import UserPanel from './pages/userPanelComponent/UserPanel';
 
 import './App.css';
