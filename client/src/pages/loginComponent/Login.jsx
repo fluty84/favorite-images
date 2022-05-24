@@ -50,6 +50,7 @@ const Login = () =>{
     return (
 
         <Container className="d-flex flex-column align-items-center">
+            <h1>Your Favorite Picture Keeper</h1>
             <Form  onSubmit={handleSubmit} style={{ width: '350px' }}>
                 <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
