@@ -49,8 +49,8 @@ const Login = () =>{
 
     return (
 
-        <Container>
-            <Form onSubmit={handleSubmit}>
+        <Container className="d-flex flex-column align-items-center">
+            <Form  onSubmit={handleSubmit} style={{ width: '350px' }}>
                 <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" name="email" value={loginForm.email} onChange={handleInputChange} />
@@ -59,7 +59,7 @@ const Login = () =>{
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" value={loginForm.password} onChange={handleInputChange} />
                 </Form.Group>
-                <Button variant="dark" type="submit" style={{ width: '100%' }}>Login</Button>
+                <Button variant="dark" type="submit" style={{ width: '200px' }}>Login</Button>
             </Form>
 
             <Signin
