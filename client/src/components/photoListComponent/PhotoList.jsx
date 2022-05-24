@@ -49,24 +49,28 @@ const PhotoList = ({newImages}) => {
                     {images.map(image => {
                         return (
                             <Col md={4} key={image._id}>
-                                <Card className='card'>
+                                <Card className='card justify-content-between'>
                                     <Card.Img variant="top" src={image.imgURL} />
                                     <Card.Title>{image.title}</Card.Title>
-                                    <Button variant='dark' onClick={() => deleteImage(image._id)}>Borrar</Button>
-                                    <Button variant='warning' onClick={ () => {
-                                        setModalData(image)
-                                        handleShow()
-                                    }
-                                    }>EDIT</Button>
-                                    <EditPhoto
-                                        modalData={modalData}
-                                        handleClose={handleClose}
-                                        show={show}
-                                        setShow={setShow}
-                                        getUserImages={() => getUserImages({ owner: user._id })}
-                                    ></EditPhoto>
+                                    <div className="buttons">
+                                        <Button variant='dark' onClick={() => deleteImage(image._id)}>Delete</Button>
+                                        <Button variant='warning' onClick={ () => {
+                                            setModalData(image)
+                                            handleShow()
+                                        }
+                                        }>Edit</Button>
+                                    </div>
+                                   
                                 </Card>
+                                <EditPhoto
+                                    modalData={modalData}
+                                    handleClose={handleClose}
+                                    show={show}
+                                    setShow={setShow}
+                                    getUserImages={() => getUserImages({ owner: user._id })}
+                                ></EditPhoto>
                             </Col>
+                            
                         )
                     })
                     }

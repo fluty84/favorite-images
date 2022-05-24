@@ -11,4 +11,5 @@
 
 Button {
     width: 200px;
+    margin: 4px !important;
 }

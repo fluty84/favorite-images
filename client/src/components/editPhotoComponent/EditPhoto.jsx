@@ -5,6 +5,7 @@ import { Button, Modal, Form } from "react-bootstrap"
 import ImagesService from "../../services/images.services"
 import UploadService from "../../services/upload.service"
 
+import './EditPhoto.css'
 
 const EditPhoto = ({ handleClose, show, modalData, getUserImages }) => {
 
@@ -77,7 +78,7 @@ const EditPhoto = ({ handleClose, show, modalData, getUserImages }) => {
     return (
 
         <>
-            <Modal show={show} onHide={handleClose}>
+            <Modal className="edit" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Photo <strong>{modalData.title}</strong></Modal.Title>
                 </Modal.Header>
