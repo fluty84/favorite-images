@@ -7,7 +7,7 @@ import EditPhoto from '../editPhotoComponent/EditPhoto'
 
 import './PhotoList.css'
 
-const PhotoList = () => {
+const PhotoList = ({newImages}) => {
 
     const [images, setImages] = useState()
 
@@ -38,13 +38,12 @@ const PhotoList = () => {
 
     useEffect(() => {
         getUserImages({ owner: user._id })
-    }, [])
+    }, [newImages])
 
 
 
     return (
         <>
-            <h3>PhotoList</h3>
             <Container className='justify-content-center d-flex'>
                 {images && <Row>
                     {images.map(image => {

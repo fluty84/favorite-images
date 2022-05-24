@@ -8,12 +8,14 @@ import { AuthContext } from "../../context/auth.context";
 const UserPanel = () => {
 
     const { user } = useContext(AuthContext)
+    const [newImages, setNewImages] = useState([])
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    
     return (
         <>
             <Container>
@@ -23,8 +25,12 @@ const UserPanel = () => {
                     handleClose={handleClose}
                     show={show}
                     setShow={setShow}
+                    setNewImages={setNewImages}
+                    id={user._id}
                 ></NewPhoto>
-                <PhotoList></PhotoList>
+                <PhotoList
+                    newImages={newImages}
+                ></PhotoList>
             </Container>
         </>
     )

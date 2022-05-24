@@ -6,18 +6,17 @@ import ImagesService from "../../services/images.services"
 import UploadService from "../../services/upload.service"
 
 
-const NewPhoto = ({ handleClose, handleShow, show }) => {
+const NewPhoto = ({ handleClose, handleShow, show, setNewImages, id }) => {
 
     const { user } = useContext(AuthContext)
 
     const [loadingImage, setLoadingImage] = useState(false)
+    
     const [imageForm, setImageForm] = useState({
-        owner: user._id,
+        owner: id,
         imgURL: "",
         title: ""
     })
-
-    //const { owner, imgURL, title } = imageForm
 
     const uploadImage = e => {
 
@@ -47,10 +46,7 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setImageForm({
-            ...imageForm, 
-            owner:user._id
-        })
+        
         const { owner, imgURL, title } = imageForm
 
         if (!owner || !imgURL|| !title) {
@@ -60,6 +56,7 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
         ImagesService
             .create(imageForm)
             .then(res => {
+                setNewImages(res)
                 setImageForm({
                     imgURL: "",
                     title: ""
