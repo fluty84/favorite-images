@@ -3,12 +3,12 @@ const { Schema, model } = require("mongoose");
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const imageSchema = new Schema(
   {
-    owner: {
+    owner: { 
       type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-    ,
-    title: String,
+    ref: 'User'
+  },
+    
+    title: String, 
     imgURL: String
   },
   {

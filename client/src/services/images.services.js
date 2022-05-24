@@ -24,6 +24,14 @@ class ImagesService {
    create = imageData => {
       return this.api.post('/images/image',imageData) 
    }
+
+   getAll = owner => {
+       return this.api.get('/images', {owner})
+   }
+
+   delete = id => {
+       return this.api.post('images/delete', id)
+   }
 }
 
 const imagesService = new ImagesService()

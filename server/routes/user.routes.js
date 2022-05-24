@@ -55,11 +55,6 @@ router.post('/create', (req, res) => {
 
 })
 
-///// Save user's Image /////
-
-router.post('/newpicture', (req, res)=> {
-
-})
 
 
 

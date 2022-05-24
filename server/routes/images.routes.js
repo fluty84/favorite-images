@@ -36,7 +36,7 @@ router.get('/', (req, res)=> {
     const {owner} = req.body
 
     Image 
-        .find({owner})
+        .find(owner)
         .select('title imgURL')
         .then(response => res.json(response))
         .catch(err => {
@@ -44,5 +44,17 @@ router.get('/', (req, res)=> {
         })
 })
 
+/////Delete Image/////
+
+router.post('/delete', (req, res) => {
+    const {id} = req.body
+    console.log(id,'--------------ID', req.body)
+    Image 
+        .findByIdAndDelete(id)
+        .then(response => res.json(response))
+        .catch(err => {
+            res.status(500).json({ message: `Internal server error ${err}` })
+        })
+})
 
 module.exports = router

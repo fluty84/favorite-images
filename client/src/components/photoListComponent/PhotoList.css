@@ -1,0 +1,14 @@
+.card{
+    height: 20rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card img{
+    object-fit: scale-down;
+    max-height: 15rem;
+}
+
+Button {
+    width: 200px;
+}

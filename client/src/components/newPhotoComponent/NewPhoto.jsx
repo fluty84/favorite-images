@@ -30,7 +30,6 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
             .uploadImage(uploadData)
             .then(({ data }) => {
                 setLoadingImage(false)
-                console.log(data)
                 setImageForm({ ...imageForm, imgURL: data.cloudinary_url })
             })
             .catch(err => console.log(err))
@@ -48,6 +47,10 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setImageForm({
+            ...imageForm, 
+            owner:user._id
+        })
         const { owner, imgURL, title } = imageForm
 
         if (!owner || !imgURL|| !title) {
@@ -57,11 +60,11 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
         ImagesService
             .create(imageForm)
             .then(res => {
-                console.log(res)
                 setImageForm({
                     imgURL: "",
                     title: ""
                 })
+                handleClose()
             })
             .catch(err => console.log(err))
     }
