@@ -1,23 +1,28 @@
-import { useContext, useState } from "react"
+import { useEffect } from "react"
+import { useState } from "react"
 import { Button, Modal, Form } from "react-bootstrap"
-import { AuthContext } from "../../context/auth.context"
 
 import ImagesService from "../../services/images.services"
 import UploadService from "../../services/upload.service"
 
 
-const NewPhoto = ({ handleClose, handleShow, show }) => {
+const EditPhoto = ({ handleClose, show, modalData, getUserImages }) => {
 
-    const { user } = useContext(AuthContext)
-
+    const {title, imgURL, _id} = modalData
     const [loadingImage, setLoadingImage] = useState(false)
-    const [imageForm, setImageForm] = useState({
-        owner: user._id,
+    const [editForm, setEditForm] = useState({
+        id: _id,
         imgURL: "",
         title: ""
     })
 
-    //const { owner, imgURL, title } = imageForm
+    useEffect(()=>{
+        setEditForm({
+            id: _id,
+            imgURL: imgURL,
+            title: title
+        })
+    },[modalData])
 
     const uploadImage = e => {
 
@@ -30,40 +35,39 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
             .uploadImage(uploadData)
             .then(({ data }) => {
                 setLoadingImage(false)
-                setImageForm({ ...imageForm, imgURL: data.cloudinary_url })
+                setEditForm({ ...editForm, imgURL: data.cloudinary_url })
             })
             .catch(err => console.log(err))
     }
 
 
     const handleImputChange = (e) => {
+       
         const { name, value } = e.target
-
-        setImageForm({
-            ...imageForm,
+        
+        setEditForm({
+            ...editForm,
             [name]: value,
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setImageForm({
-            ...imageForm, 
-            owner:user._id
-        })
-        const { owner, imgURL, title } = imageForm
 
-        if (!owner || !imgURL|| !title) {
+        const { id, imgURL, title } = editForm
+
+        if (!id || !imgURL|| !title) {
             alert('please fill in all fields of the form')
             return
         }
         ImagesService
-            .create(imageForm)
+            .edit(editForm)
             .then(res => {
-                setImageForm({
+                setEditForm({
                     imgURL: "",
                     title: ""
                 })
+                getUserImages()
                 handleClose()
             })
             .catch(err => console.log(err))
@@ -73,18 +77,14 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
     return (
 
         <>
-            <Button variant="dark" onClick={handleShow}>
-                Upload photo
-            </Button>
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>New Image</Modal.Title>
+                    <Modal.Title>Edit Photo <strong>{modalData.title}</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="title">
-                            <Form.Label>Select image to upload</Form.Label>
+                            <Form.Label>Select modalData to upload</Form.Label>
                             <Form.Control
                                 type="file"
                                 name="imgURL"
@@ -98,7 +98,7 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
                             <Form.Control
                                 type="text"
                                 name="title"
-                                placeholder="image title"
+                                placeholder={modalData.title}
                                 onChange={handleImputChange}
                                 autoFocus
                             />
@@ -119,4 +119,4 @@ const NewPhoto = ({ handleClose, handleShow, show }) => {
     )
 }
 
-export default NewPhoto
+export default EditPhoto

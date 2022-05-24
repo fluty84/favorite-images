@@ -48,9 +48,20 @@ router.get('/', (req, res)=> {
 
 router.post('/delete', (req, res) => {
     const {id} = req.body
-    console.log(id,'--------------ID', req.body)
     Image 
         .findByIdAndDelete(id)
+        .then(response => res.json(response))
+        .catch(err => {
+            res.status(500).json({ message: `Internal server error ${err}` })
+        })
+})
+
+/////Edit Image////
+
+router.post('/edit', (req, res) => {
+    const {id, imgURL, title} = req.body
+    Image
+        .findByIdAndUpdate(id, {imgURL, title})
         .then(response => res.json(response))
         .catch(err => {
             res.status(500).json({ message: `Internal server error ${err}` })

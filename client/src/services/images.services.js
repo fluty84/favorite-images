@@ -30,7 +30,11 @@ class ImagesService {
    }
 
    delete = id => {
-       return this.api.post('images/delete', id)
+       return this.api.post('/images/delete', id)
+   }
+
+   edit = imageData => {
+       return this.api.post('/images/edit', imageData)
    }
 }
 
