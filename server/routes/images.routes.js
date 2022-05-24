@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const {isAuthenticated} = require('../middlewares/jwt.middleware')
 
 const Image = require('../models/Image.model')
 
@@ -32,7 +33,7 @@ router.post('/image', (req, res) => {
 
 /////Get all user's images/////
 
-router.get('/', (req, res)=> {
+router.get('/', isAuthenticated, (req, res)=> {
     const {owner} = req.body
 
     Image 
