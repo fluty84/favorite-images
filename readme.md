@@ -2,6 +2,8 @@
 
 Made with NodeJS, REACT, Express and MongoDB.
 
+Images are stored on Cloudinary. Use your cretentials on .env file from server folder. 
+
 To run localy: 
 
 #On "server" folder:
